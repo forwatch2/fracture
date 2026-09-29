@@ -4,9 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fracture — Arène du Gardien</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Fracture — Arène du Gardien : un jeu de boss en 3D. Esquive les patterns, frappe au bon moment, progresse et débloque équipements et succès. Clavier, souris ou tactile.">
+<meta name="theme-color" content="#0a0b12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fracture">
+<meta property="og:title" content="Fracture — Arène du Gardien">
+<meta property="og:description" content="Jeu de boss en 3D : esquive, frappe, progresse. Jouable au clavier, à la souris et sur mobile.">
+<!-- TODO avant publication : remplace par l'URL absolue de ta page GitHub Pages (les réseaux sociaux exigent une URL complète) -->
+<meta property="og:url" content="https://forwatch2.github.io/fracture/">
+<meta property="og:image" content="https://forwatch2.github.io/fracture/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fracture — Arène du Gardien">
+<meta name="twitter:description" content="Jeu de boss en 3D : esquive, frappe, progresse.">
+<meta name="twitter:image" content="https://forwatch2.github.io/fracture/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0b12'/%3E%3Cpath d='M38 6 27 24l12 12-13 14 8 8' fill='none' stroke='%23ff5d3a' stroke-width='6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  /* Polices servies par le site lui-même (aucune requête vers Google Fonts). Si vendor/fonts est absent : polices système. */
+  @font-face { font-family:'Space Grotesk'; font-style:normal; font-weight:400; font-display:swap; src:url(vendor/fonts/space-grotesk-latin-400-normal.woff2) format('woff2'); }
+  @font-face { font-family:'Space Grotesk'; font-style:normal; font-weight:500; font-display:swap; src:url(vendor/fonts/space-grotesk-latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family:'Space Grotesk'; font-style:normal; font-weight:600; font-display:swap; src:url(vendor/fonts/space-grotesk-latin-600-normal.woff2) format('woff2'); }
+  @font-face { font-family:'Space Grotesk'; font-style:normal; font-weight:700; font-display:swap; src:url(vendor/fonts/space-grotesk-latin-700-normal.woff2) format('woff2'); }
+  @font-face { font-family:'Big Shoulders Display'; font-style:normal; font-weight:700; font-display:swap; src:url(vendor/fonts/big-shoulders-display-latin-700-normal.woff2) format('woff2'); }
+  @font-face { font-family:'Big Shoulders Display'; font-style:normal; font-weight:800; font-display:swap; src:url(vendor/fonts/big-shoulders-display-latin-800-normal.woff2) format('woff2'); }
+</style>
 <style>
   :root {
     --void: #0a0b12;
@@ -167,6 +190,14 @@
   .diff-section-card .diff-desc { margin-top:8px; }
   .lb-title { font-size:11px; font-weight:700; letter-spacing:.05em; color:var(--bone); opacity:.6; margin:12px 0 4px 1px; }
   .training-config { display:flex; flex-direction:column; align-items:center; gap:8px; width:100%; }
+  .training-config.hidden { display:none; }
+  .privacy-panel { max-height: 100%; }
+  .privacy-text { text-align:left; font-size:12.5px; line-height:1.5; color:var(--bone-dim); background:var(--void-2); border:1px solid rgba(255,255,255,.09); border-radius:10px; padding:12px 14px; }
+  .privacy-text h3 { margin:12px 0 4px; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--bone); }
+  .privacy-text h3:first-child { margin-top:0; }
+  .privacy-text p, .privacy-text ul { margin:0 0 6px; } .privacy-text ul { padding-left:18px; }
+  .link-btn { pointer-events:all; cursor:pointer; background:none; border:none; color:var(--bone-dim); font-family:inherit; font-size:11px; text-decoration:underline; padding:6px; }
+  .cloud-box .cloud-hint { font-size:11px; opacity:.7; margin:4px 0; }
   .training-note { width:min(360px,88vw); color:var(--bone-dim); font-size:10.5px; line-height:1.35; text-align:center; }
   .diff-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .diff-btn {
@@ -328,6 +359,19 @@
     background: rgba(20,22,31,0.9); border: 1px solid rgba(79,209,197,0.5); padding: 11px 18px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); backdrop-filter: blur(6px); }
   .stats-fab:hover { border-color: var(--glacier); color: var(--glacier); }
   .overlay.hidden .stats-fab { display: none; }
+  .global-lb { width: min(520px, 94vw); box-sizing: border-box; padding: 16px; border-radius: 18px; text-align: left; font-size: 12.5px; color: var(--bone);
+    background: linear-gradient(180deg, rgba(26,28,40,0.86), rgba(12,13,20,0.92)); border: 1px solid rgba(255,255,255,0.09); box-shadow: 0 24px 70px rgba(0,0,0,0.55); }
+  .glb-title { font-weight: 800; font-size: 14px; letter-spacing: .04em; margin-bottom: 8px; }
+  .glb-bar { display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0; }
+  .glb-bar .mode-btn { padding: 6px 10px; font-size: 11.5px; }
+  .glb-sub { font-size: 10.5px; letter-spacing: .04em; color: var(--bone-dim); margin: 10px 0 3px; }
+  .glb-row { display: grid; grid-template-columns: 26px 1fr auto auto; gap: 8px; align-items: center; width: 100%; box-sizing: border-box; padding: 6px 8px; border-radius: 6px; background: rgba(255,255,255,0.02); color: var(--bone); font: inherit; font-size: 12.5px; text-align: left; border: 1px solid transparent; }
+  .glb-row:nth-child(even) { background: rgba(255,255,255,0.045); }
+  .glb-row.me { background: rgba(79,209,197,0.14); border-color: rgba(79,209,197,0.4); }
+  button.glb-row { cursor: pointer; grid-template-columns: 1fr auto auto; } button.glb-row.sel { border-color: var(--ember); }
+  .glb-row .t { color: var(--glacier); font-weight: 700; } .glb-row .s { color: #d9c15a; font-weight: 700; } .glb-row .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .glb-status { font-size: 11px; color: var(--bone-dim); margin-top: 6px; min-height: 1em; }
+  @media (min-width: 1280px) { .global-lb { position: fixed; left: 24px; top: 50%; transform: translateY(-50%); width: 340px; max-height: calc(100vh - 48px); overflow-y: auto; } }
 
   /* ---------- Écran de statistiques ---------- */
   .stats-panel { width: min(760px, 96vw); display: flex; flex-direction: column; align-items: center; gap: 14px; }
@@ -445,7 +489,7 @@
 <div class="overlay" id="menu-overlay">
 <div class="menu-panel">
   <h1 class="title">FRACTURE<br><span>Arène du Gardien</span></h1>
-    <div class="player-id-row"><input type="text" id="player-name-input" class="player-name-input" maxlength="24" placeholder="Ton pseudo" autocomplete="off"><select id="player-title-select" class="player-title-select" aria-label="Titre affiché"></select></div>
+    <div class="player-id-row"><select id="player-title-select" class="player-title-select" aria-label="Titre affiché"></select></div>
     <div class="player-title-line" id="player-title-line"></div>
   <p class="subtitle" id="menu-subtitle">Esquive les patterns du Gardien, rapproche-toi pour le frapper. Il enrage en dessous d'un certain seuil de vie. Vise le meilleur rang. Joystick et boutons tactiles activés automatiquement sur mobile.</p>
   <div class="mode-row" id="mode-row">
@@ -512,20 +556,56 @@
         </div>
   <button class="inv-open-btn" id="open-inv-btn">Inventaire</button>
   <div class="loadout-line" id="loadout-line"></div>
-  <div class="save-row">
-    <button class="save-btn" id="export-save-btn">Exporter mon code</button>
-    <button class="save-btn" id="import-save-btn">Importer un code</button>
-  </div>
   <div class="cloud-box" id="cloud-box" style="display:none">
     <div id="cloud-status">Cloud : hors ligne</div>
-    <div class="row"><input type="text" id="cloud-name" maxlength="16" placeholder="Pseudo unique" autocomplete="off"><button class="save-btn" id="cloud-claim">Réserver</button></div>
-    <div class="row"><button class="save-btn" id="cloud-google">Lier Google</button><button class="save-btn" id="cloud-discord">Lier Discord</button><button class="save-btn" id="cloud-sync">Synchroniser</button></div>
+    <div class="cloud-hint" id="cloud-hint">Connecte-toi pour sauvegarder ta progression et récupérer ton pseudo.</div>
+    <div class="row"><button class="save-btn" id="cloud-google">Continuer avec Google</button><button class="save-btn" id="cloud-discord">Continuer avec Discord</button></div>
+    <div class="row"><button class="save-btn" id="cloud-sync">Synchroniser</button><button class="save-btn" id="cloud-signout" style="display:none">Se déconnecter</button></div>
   </div>
   <button class="save-btn" id="replay-last-btn" style="display:none">Revoir mon dernier combat</button>
   <button class="save-btn" id="open-options-btn">Options</button>
+  <button class="link-btn" id="open-privacy-btn">Confidentialité & données</button>
   <button class="go-btn" id="start-btn">Entrer dans l'arène</button>
 </div>
+  <aside class="global-lb" id="global-lb" aria-label="Classement mondial">
+    <div class="glb-title">🏆 Classement mondial</div>
+    <div class="glb-bar" id="glb-diffs"></div>
+    <div class="glb-sub">CHAMPION PAR BOSS (meilleur temps) — touche un boss pour voir son top 10</div>
+    <div id="glb-champs"></div>
+    <div class="glb-sub" id="glb-list-title">TOP 10</div>
+    <div class="glb-bar" id="glb-mode"></div>
+    <div id="glb-list"></div>
+    <div class="glb-status" id="glb-status"></div>
+  </aside>
   <button class="stats-fab" id="open-stats-btn">📊 Statistiques</button>
+</div>
+
+<div class="overlay hidden" id="privacy-overlay">
+  <div class="options-panel privacy-panel">
+    <h2 class="inv-title">Confidentialité & données</h2>
+    <div class="privacy-text">
+      <h3>Qui est responsable</h3>
+      <p>Éditeur : <span id="legal-editor"></span>. Contact pour toute demande : <span id="legal-contact"></span>.</p>
+      <h3>Ce qui est enregistré</h3>
+      <ul>
+        <li><b>Sur ton appareil</b> : ta progression (niveau, XP, objets, succès, records, titres), tes réglages et ton dernier rejeu, dans le stockage local du navigateur. Pas de cookie publicitaire ni de suivi.</li>
+        <li><b>Dans le cloud (Supabase)</b> : dès que le jeu est ouvert en ligne, un compte invité anonyme est créé et ta progression y est synchronisée, sans nom ni e-mail. Les réglages (touches, volume, qualité) ne sont pas envoyés.</li>
+        <li><b>Classement mondial</b> : si tu as un pseudo (compte Google/Discord), tes meilleurs temps et scores par boss sont publiés avec ce pseudo. Supprimer ton compte les efface.</li>
+        <li><b>Si tu te connectes avec Google ou Discord</b> : le service d'authentification reçoit l'identifiant du compte, l'adresse e-mail et le nom d'affichage fournis par ce fournisseur. Le jeu n'utilise que ton pseudo (prénom Google ou pseudo Discord, nettoyé) et n'affiche jamais ton e-mail.</li>
+      </ul>
+      <h3>Pourquoi</h3>
+      <p>Uniquement pour sauvegarder et retrouver ta progression sur tes appareils et afficher ton pseudo. Aucune publicité, aucune revente, aucune analyse de comportement.</p>
+      <h3>Qui reçoit des données</h3>
+      <p>Supabase (base de données et authentification), Google ou Discord (uniquement si tu choisis de t'y connecter), GitHub (hébergement de la page). Les polices et bibliothèques du jeu sont servies par le site lui-même ; si un fichier local manque, une bibliothèque peut être chargée depuis cdnjs ou jsDelivr, qui voient alors ton adresse IP. Certains prestataires peuvent traiter des données hors de l'Union européenne : consulte leurs politiques.</p>
+      <h3>Durée de conservation</h3>
+      <p>Tant que le compte existe. La suppression du compte (Options &gt; Compte) efface immédiatement la progression cloud, le pseudo et le compte.</p>
+      <h3>Tes droits</h3>
+      <p>Accès, rectification, effacement, limitation, opposition et portabilité (export du code de progression dans Options). Pour l'effacement, utilise le bouton « Supprimer mon compte et mes données ». Pour le reste, écris au contact ci-dessus. Tu peux aussi saisir la CNIL (cnil.fr).</p>
+      <h3>Âge</h3>
+      <p>Le jeu s'adresse aux personnes de 15 ans et plus ; en dessous, l'accord d'un parent est nécessaire. Google et Discord imposent aussi leurs propres âges minimum.</p>
+    </div>
+    <div class="save-row"><button class="save-btn" id="privacy-close">Retour</button></div>
+  </div>
 </div>
 
 <div class="overlay hidden" id="options-overlay">
@@ -575,6 +655,21 @@
         <small>Efface niveau, XP, compétences, objets, records et statistiques pour TOUS les boss. Action irréversible, sans confirmation possible ensuite.</small>
         <button class="danger-btn" id="reset-account-btn" style="margin-top:8px;">Réinitialiser mon compte</button>
         <small id="reset-status" style="display:block;margin-top:6px;color:#8fffb0;"></small>
+      </div>
+      <div class="option-card" id="cloud-account-card" style="display:none">
+        <label>Compte cloud</label>
+        <small>Se déconnecter efface la progression de CET appareil (elle reste sur ton compte). Supprimer le compte efface définitivement ta progression cloud, ton pseudo et ton compte, puis la progression de cet appareil.</small>
+        <div class="save-row" style="margin-top:8px;flex-wrap:wrap;"><button class="save-btn" id="cloud-signout-2" style="display:none">Se déconnecter</button><button class="danger-btn" id="cloud-delete">Supprimer mon compte et mes données</button></div>
+      </div>
+      <div class="option-card">
+        <label>Confidentialité</label>
+        <small>Ce que le jeu enregistre, où, pourquoi, et comment exercer tes droits.</small>
+        <button class="save-btn" id="open-privacy-btn-2" style="margin-top:8px;">Lire la politique de confidentialité</button>
+      </div>
+      <div class="option-card">
+        <label>Sauvegarde manuelle (secours)</label>
+        <small>Ta progression est synchronisée avec ton compte Google/Discord : ces codes ne servent plus qu'à récupérer une ancienne sauvegarde.</small>
+        <div class="save-row" style="margin-top:8px;"><button class="save-btn" id="export-save-btn">Exporter mon code</button><button class="save-btn" id="import-save-btn">Importer un code</button></div>
       </div>
     </div>
     <div class="save-row"><button class="save-btn" id="options-close">Retour</button></div>
@@ -650,7 +745,8 @@
   <button class="save-btn" id="end-menu-btn">Menu / Inventaire</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="vendor/three.min.js"></script>
+<script>window.THREE || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');</script>
 <script>
 (function () {
   "use strict";
@@ -1327,7 +1423,7 @@
     return loadProgress();
   }
 
-  let cloudHook = null, cloudLockedName = ''; // renseignés par le MODULE CLOUD
+  let cloudHook = null, cloudLockedName = '', scoreHook = null; // renseignés par le MODULE CLOUD
   const HL = { on: false, won: null }; // HL.on = simulation headless (aucun DOM, aucune sauvegarde)
   let replayMode = false;              // rejeu visuel en cours
   function saveProgress() {
@@ -3433,6 +3529,7 @@
         } else {
           if (rec.bestTimes[diffIndex] == null || t < rec.bestTimes[diffIndex]) rec.bestTimes[diffIndex] = t;
           if (rec.bestScores[diffIndex] == null || score > rec.bestScores[diffIndex]) rec.bestScores[diffIndex] = score;
+          if (scoreHook) scoreHook(currentBossId, diffIndex, t, score); // classement mondial : victoires réelles seulement
         }
       }
     }
@@ -4189,22 +4286,15 @@
   // Pseudo + titre (affichés sous le pseudo pour la compétition). Tout passe
   // par .value / .textContent : aucune donnée n'est jamais interprétée comme HTML.
   function refreshIdentityUI() {
-    const input = document.getElementById('player-name-input');
     const sel = document.getElementById('player-title-select');
     const line = document.getElementById('player-title-line');
-    if (!input || !sel || !line) return;
-    if (document.activeElement !== input) input.value = cloudLockedName || progress.playerName || '';
-    input.readOnly = !!cloudLockedName; // pseudo réservé : modifiable via le bloc Cloud
+    if (!sel || !line) return;
     sel.innerHTML = '';
     const optNone = document.createElement('option'); optNone.value = 'none'; optNone.textContent = 'Aucun titre'; sel.appendChild(optNone);
     progress.unlockedTitles.forEach(id => { const o = document.createElement('option'); o.value = id; o.textContent = getTitleName(id); sel.appendChild(o); });
     sel.value = progress.titleId && (progress.titleId === 'none' || progress.unlockedTitles.includes(progress.titleId)) ? progress.titleId : 'none';
     line.textContent = getTitleName(progress.titleId);
   }
-  document.getElementById('player-name-input').addEventListener('change', (e) => {
-    progress.playerName = String(e.target.value).replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 24);
-    saveProgress(); refreshIdentityUI();
-  });
   document.getElementById('player-title-select').addEventListener('change', (e) => {
     const v = e.target.value;
     progress.titleId = (v === 'none' || progress.unlockedTitles.includes(v)) ? v : 'none';
@@ -4923,6 +5013,25 @@
         : (r.ok ? '✓ ' + r.total + ' / ' + r.total + ' combats rejoués à l\'identique' : '✗ ' + r.mismatches.length + ' divergence(s) sur ' + r.total) + ' (' + r.wins + ' victoires du bot, ' + Math.round(performance.now() - t0) + ' ms)';
     }, 30);
   });
+  /* ---------- Confidentialité : modale + informations légales de l'éditeur (à renseigner) ---------- */
+  const LEGAL = { editor: 'RACINE Naël', contact: 'nael.racine24@gmail.com' };   // <- TON nom/pseudo d'éditeur et un e-mail ou lien de contact
+  (function initPrivacy() {
+    const ov = document.getElementById('privacy-overlay');
+    document.getElementById('legal-editor').textContent = LEGAL.editor || '[à renseigner par l\'éditeur]';
+    document.getElementById('legal-contact').textContent = LEGAL.contact || '[à renseigner par l\'éditeur]';
+    let back = 'menu';
+    function open(from) {
+      back = from;
+      menuOverlay.classList.add('hidden'); optionsOverlay.classList.add('hidden');
+      ov.classList.remove('hidden'); ov.scrollTop = 0;
+    }
+    document.getElementById('open-privacy-btn').addEventListener('click', () => open('menu'));
+    document.getElementById('open-privacy-btn-2').addEventListener('click', () => open('options'));
+    document.getElementById('privacy-close').addEventListener('click', () => {
+      ov.classList.add('hidden');
+      (back === 'options' ? optionsOverlay : menuOverlay).classList.remove('hidden');
+    });
+  })();
   window.FractureReplay = { replay, replayRecord, selfTest, sanitizeReplay, getLastReplay: () => lastReplay, SIM_HZ };
 
   /* ==========================================================================
@@ -4933,8 +5042,9 @@
      - Les réglages (touches, qualité...) restent locaux : ils ne sont pas synchronisés.
      - Métadonnées de synchro dans une clé séparée : jamais dans `progress` ni dans le code exporté.
      ========================================================================== */
-  const CLOUD = { url: 'sb_publishable_hgZs-xCgNE_g-FyiyPfL1w_naZd-_0t', anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnZ3JhcnJveHRrd2ZoYXNobm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2OTk5OTAsImV4cCI6MjEwNjI3NTk5MH0.7qUij31t6Tefi3DbWCeXZP2Da91Ob9Vd-hJJQYOwO0M' };   // <- Project URL + clé publique (voir GUIDE)
+  const CLOUD = { url: 'https://pggrarroxtkwfhashnoi.supabase.co', anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnZ3JhcnJveHRrd2ZoYXNobm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2OTk5OTAsImV4cCI6MjEwNjI3NTk5MH0.7qUij31t6Tefi3DbWCeXZP2Da91Ob9Vd-hJJQYOwO0M' };   // <- Project URL + clé publique (voir GUIDE)
   const CLOUD_LIB = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js';
+  const CLOUD_LIB_LOCAL = 'vendor/supabase.js';   // même version, servie par le site (repli : CDN ci-dessus)
   const CLOUD_PUSH_DELAY_MS = 8000, CLOUD_POLL_MS = 60000;
   const CLOUD_META_KEY = 'fracture_cloud_meta_v1', NAME_RE = /^[A-Za-z0-9_-]{3,16}$/;
   const UUID_RE = /^[0-9a-f-]{36}$/i;
@@ -4957,14 +5067,35 @@
   function cmpRank(a, b) { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] > b[i] ? 1 : -1; return 0; }
   function describeSave(p) { const r = rankOf(p); return 'niv. ' + levelInfo(p.xp).level + ', prestige ' + r[0] + ', ' + r[2] + ' victoire(s), ' + r[3] + ' succès'; }
   function refreshCloudStatus(extra) {
+    const showOut = !!sb && !cloudAnon;
+    [['cloud-signout', showOut], ['cloud-signout-2', showOut], ['cloud-account-card', !!sb]].forEach(([id, on]) => { const el = $c(id); if (el) el.style.display = on ? '' : 'none'; });
     if (!sb) return cloudStatus(CLOUD.url ? 'Cloud indisponible (hors ligne) — progression locale' : 'Cloud non configuré');
-    cloudStatus((cloudAnon ? 'Compte anonyme' : 'Compte lié') + (meta.username ? ' · ' + meta.username : '') + ' · ' + (meta.dirty ? 'modifications en attente' : 'synchronisé') + (extra ? ' · ' + extra : ''));
+    cloudStatus((cloudAnon ? 'Invité' : 'Connecté') + (meta.username ? ' · ' + meta.username : '') + ' · ' + (meta.dirty ? 'modifications en attente' : 'synchronisé') + (extra ? ' · ' + extra : ''));
+    ['cloud-google', 'cloud-discord', 'cloud-hint'].forEach(id => { const el = $c(id); if (el) el.style.display = cloudAnon ? '' : 'none'; });
   }
   function adoptCloud(p, rev) {
     p.settings = progress.settings; if (meta.username) p.playerName = meta.username;
     cloudQuiet = true; progress = p; checkAchievements(null); saveProgress(); cloudQuiet = false;
     meta.rev = rev; meta.dirty = false; saveMeta();
     updateProgressUI(); refreshMenuLoadout(); refreshIdentityUI();
+  }
+  // Pseudo dérivé du compte : uniquement [A-Za-z0-9_-], 3–16 car. Jamais l'e-mail ; Google = prénom seul.
+  function nameFromUser(u) {
+    const md = (u && u.user_metadata) || {}, cc = md.custom_claims || {};
+    const direct = [cc.global_name, md.user_name, md.preferred_username].find(v => typeof v === 'string' && v.trim());
+    let raw = direct || '';
+    if (!raw) { const full = [md.full_name, md.name].find(v => typeof v === 'string' && v.trim()); raw = full ? full.trim().split(/\s+/)[0] : ''; }
+    raw = String(raw).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 16);
+    return raw.length >= 3 ? raw : '';
+  }
+  async function autoClaimName(u) {
+    const base = nameFromUser(u) || 'Joueur';
+    for (let i = 0; i < 4; i++) {
+      const n = i === 0 && base !== 'Joueur' ? base : base.slice(0, 11) + String(Math.floor(1000 + Math.random() * 9000));
+      const r = await sb.from('profiles').insert({ user_id: meta.uid, username: n });
+      if (!r.error) { meta.username = n; return; }
+      if (r.error.code !== '23505' && !/forbidden/.test(String(r.error.message || ''))) return; // autre erreur : on réessaiera à la prochaine synchro
+    }
   }
   async function ensureSession() {
     let { data: { session } } = await sb.auth.getSession();
@@ -4973,7 +5104,9 @@
     if (meta.uid !== session.user.id) { meta = { uid: session.user.id, rev: 0, dirty: true, username: '' }; } // autre compte : la locale devient à comparer
     const pr = await sb.from('profiles').select('username').eq('user_id', meta.uid).maybeSingle();
     if (!pr.error && pr.data && NAME_RE.test(pr.data.username || '')) meta.username = pr.data.username;
-    saveMeta();
+    else if (!pr.error && !pr.data && !cloudAnon) await autoClaimName(session.user);
+    if (meta.username && progress.playerName !== meta.username) { progress.playerName = meta.username; saveProgress(); }
+    saveMeta(); refreshIdentityUI();
     return session.user.id;
   }
   async function pushSave(rev) {
@@ -5008,37 +5141,66 @@
           if (window.confirm(txt)) { if (cloudWins) adoptCloud(cloud, row.rev); else if (!(await pushSave(row.rev))) cloudAsked = false; cloudAsked = false; }
         }
       }
+      await glbSync();
       refreshCloudStatus();
     } catch (e) { cloudStatus('Cloud injoignable — la progression reste locale, nouvelle tentative plus tard'); }
     finally { cloudBusy = false; }
   }
   function cloudPayloadOf(p) { const d = JSON.parse(JSON.stringify(p)); delete d.settings; return d; }
-  async function claimName() {
-    const name = $c('cloud-name').value.trim();
-    if (!NAME_RE.test(name)) return showMsg('Pseudo : 3–16 caractères (lettres, chiffres, _ et -).', 2600);
-    if (!sb || !navigator.onLine) return showMsg('Connexion requise pour réserver un pseudo.', 2400);
-    try {
-      await ensureSession();
-      const r = meta.username ? await sb.from('profiles').update({ username: name }).eq('user_id', meta.uid)
-                              : await sb.from('profiles').insert({ user_id: meta.uid, username: name });
-      if (r.error) {
-        const m = String(r.error.message || '');
-        return showMsg(r.error.code === '23505' ? 'Pseudo déjà pris.' : /forbidden/.test(m) ? 'Pseudo interdit.' : /cooldown/.test(m) ? 'Un seul changement par 24 h.' : 'Pseudo refusé.', 2600);
-      }
-      meta.username = name; saveMeta(); progress.playerName = name; saveProgress(); refreshIdentityUI(); refreshCloudStatus(); showMsg('Pseudo réservé !', 1800);
-    } catch (e) { showMsg('Cloud injoignable.', 2000); }
-  }
   async function cloudOAuth(provider, signIn) {
     if (!sb || !navigator.onLine) return showMsg('Connexion requise.', 2000);
     const opts = { provider, options: { redirectTo: location.origin + location.pathname } };
     try {
-      await ensureSession();
+      if (!signIn) await ensureSession();
       const r = signIn ? await sb.auth.signInWithOAuth(opts) : await sb.auth.linkIdentity(opts);
       if (r.error) {
         if (!signIn && /already/i.test(r.error.message || '')) return offerSignIn(provider);
         showMsg('Liaison impossible : ' + String(r.error.message || '').slice(0, 80), 3000);
       }
     } catch (e) { showMsg('Cloud injoignable.', 2000); }
+  }
+  // Remet l'appareil à zéro (progression + identité cloud locale). Les RÉGLAGES sont conservés.
+  function wipeLocalProgress() {
+    const keep = progress.settings;
+    cloudQuiet = true;
+    progress = defaultProgress(); progress.settings = keep;
+    try { localStorage.removeItem(SAVE_KEY); localStorage.removeItem(REPLAY_KEY); localStorage.removeItem(LB_PENDING_KEY); } catch (e) {}
+    saveProgress();
+    cloudQuiet = false;
+    lastReplay = null; refreshReplayBtn();
+    meta = { uid: '', rev: 0, dirty: false, username: '' }; saveMeta();
+    cloudAnon = true; cloudAsked = false; clearTimeout(pushTimer);
+    diffIndex = 0; assistedDifficulty = false;
+    currentBossId = BOSSES[0].id; currentBoss = getBossById(currentBossId);
+    updateProgressUI(); refreshOptionsUI(); refreshMenuLoadout(); refreshIdentityUI();
+    document.querySelectorAll('.diff-btn[data-diff]').forEach(b => b.classList.toggle('selected', b.dataset.diff === '0'));
+    document.getElementById('diff-desc').textContent = DIFFICULTIES[0].desc;
+    document.getElementById('assist-diff-btn').classList.remove('selected');
+    refreshCloudStatus();
+  }
+  async function cloudSignOut() {
+    if (!sb || cloudBusy) return;
+    if (typeof gameActive !== 'undefined' && gameActive) return showMsg('Termine ou quitte le combat avant de te déconnecter.', 2400);
+    if (meta.dirty && navigator.onLine) await cloudSync(true);     // dernier envoi avant de vider l'appareil
+    const pending = meta.dirty;
+    if (!window.confirm('Te déconnecter ?\nLa progression de cet appareil sera effacée (elle reste sur ton compte).' + (pending ? '\n\nATTENTION : des modifications ne sont PAS encore synchronisées et seront perdues.' : ''))) return;
+    try { await sb.auth.signOut({ scope: 'local' }); } catch (e) { return showMsg('Déconnexion impossible pour le moment.', 2400); }
+    wipeLocalProgress();
+    showMsg('Déconnecté.', 2000);
+  }
+  async function cloudDeleteAccount() {
+    if (!sb || !navigator.onLine) return showMsg('Connexion requise pour supprimer le compte.', 2600);
+    if (typeof gameActive !== 'undefined' && gameActive) return showMsg('Termine ou quitte le combat d\'abord.', 2400);
+    const typed = window.prompt('SUPPRESSION DÉFINITIVE\nTon compte, ta progression cloud et ton pseudo seront effacés, ainsi que la progression de cet appareil.\n\nTape SUPPRIMER pour confirmer.');
+    if (typed === null || typed.trim().toUpperCase() !== 'SUPPRIMER') return showMsg('Suppression annulée.', 1800);
+    try {
+      await ensureSession();
+      const r = await sb.rpc('delete_my_account');
+      if (r.error) return showMsg('Suppression impossible : ' + String(r.error.message || 'erreur').slice(0, 80) + ' (rien n\'a été effacé).', 4000);
+      try { await sb.auth.signOut({ scope: 'local' }); } catch (e) {}
+      wipeLocalProgress();
+      showMsg('Compte et données supprimés.', 3200);
+    } catch (e) { showMsg('Cloud injoignable : rien n\'a été effacé.', 2600); }
   }
   function offerSignIn(provider) {
     if (window.confirm('Ce compte est déjà lié à une autre progression. Te connecter dessus ? (ta progression locale sera comparée à celle du cloud, avec confirmation)')) cloudOAuth(provider, true);
@@ -5047,14 +5209,22 @@
     if (!CLOUD.url || !CLOUD.anonKey) return;
     $c('cloud-box').style.display = '';
     cloudHook = () => { if (cloudQuiet) return; meta.dirty = true; saveMeta(); clearTimeout(pushTimer); pushTimer = setTimeout(() => cloudSync(false), CLOUD_PUSH_DELAY_MS); };
-    $c('cloud-claim').addEventListener('click', claimName);
-    $c('cloud-google').addEventListener('click', () => cloudOAuth('google'));
-    $c('cloud-discord').addEventListener('click', () => cloudOAuth('discord'));
+    // Aucune progression locale (appareil neuf ou après déconnexion) : connexion directe ; sinon on LIE le compte pour garder la progression.
+    const noLocal = () => !rankOf(progress).some(v => v > 0);
+    $c('cloud-google').addEventListener('click', () => cloudOAuth('google', noLocal()));
+    $c('cloud-discord').addEventListener('click', () => cloudOAuth('discord', noLocal()));
+    $c('cloud-signout').addEventListener('click', cloudSignOut);
+    $c('cloud-signout-2').addEventListener('click', cloudSignOut);
+    $c('cloud-delete').addEventListener('click', cloudDeleteAccount);
     $c('cloud-sync').addEventListener('click', () => cloudSync(true));
     refreshCloudStatus();
     const sc = document.createElement('script');
-    sc.src = CLOUD_LIB; sc.async = true;
-    sc.onerror = () => refreshCloudStatus();                  // hors ligne : on réessaiera à 'online'
+    sc.src = CLOUD_LIB_LOCAL; sc.async = true;
+    sc.onerror = () => {                                       // fichier local absent : CDN en secours, sinon on réessaiera à 'online'
+      if (sc.dataset.fb) return refreshCloudStatus();
+      const fb = document.createElement('script'); fb.src = CLOUD_LIB; fb.async = true; fb.dataset.fb = '1';
+      fb.onerror = () => refreshCloudStatus(); fb.onload = sc.onload; document.head.appendChild(fb);
+    };
     sc.onload = () => {
       try {
         sb = window.supabase.createClient(CLOUD.url, CLOUD.anonKey, { auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true } });
@@ -5067,8 +5237,105 @@
     document.head.appendChild(sc);
     window.addEventListener('online', () => { if (!sb && !document.querySelector('script[src="' + CLOUD_LIB + '"][data-retry]')) { const r = document.createElement('script'); r.src = CLOUD_LIB; r.dataset.retry = '1'; r.onload = sc.onload; document.head.appendChild(r); } else cloudSync(false); });
     window.addEventListener('offline', () => refreshCloudStatus());
+    document.addEventListener('visibilitychange', () => { if (document.hidden && meta.dirty) cloudSync(false); });
     setInterval(() => { if (meta.dirty) cloudSync(false); }, CLOUD_POLL_MS);
   }
+
+  /* ==========================================================================
+     CLASSEMENT MONDIAL — meilleurs temps/scores par boss et par difficulté.
+     - N'alimente QUE des victoires réelles (hook dans endGame, records vanille) via une file locale
+       séparée (LB_PENDING_KEY) : un code importé/une sauvegarde modifiée ne peut rien y injecter.
+     - Écriture uniquement par RPC serveur (voir supabase-leaderboard.sql), lecture via RPC.
+     - Tout ce qui vient du serveur est revalidé et affiché en textContent (jamais innerHTML).
+     ========================================================================== */
+  const LB_PENDING_KEY = 'fracture_lb_pending_v1', GLB_BOSS_RE = /^[a-z0-9_]{1,32}$/;
+  let glbBoss = null, glbDiff = 1, glbBy = 'time', glbSeq = 0;
+  function lbLoadPending() {
+    const out = {};
+    try {
+      const o = JSON.parse(localStorage.getItem(LB_PENDING_KEY)) || {};
+      Object.keys(o).forEach(k => {
+        const m = /^([a-z0-9_]{1,32})\|([0-3])$/.exec(k), v = o[k];
+        if (!m || !v || typeof v !== 'object') return;
+        const t = Number.isFinite(v.t) && v.t >= 3 && v.t <= 300 ? v.t : null, sc = Number.isInteger(v.s) && v.s >= 0 && v.s <= 1000000 ? v.s : null;
+        if (t !== null || sc !== null) out[k] = { t, s: sc };
+      });
+    } catch (e) {}
+    return out;
+  }
+  function lbSavePending(p) { try { localStorage.setItem(LB_PENDING_KEY, JSON.stringify(p)); } catch (e) {} }
+  scoreHook = (b, d, t, sc) => {
+    if (!GLB_BOSS_RE.test(b) || !(d >= 0 && d <= 3)) return;
+    const p = lbLoadPending(), k = b + '|' + d, o = p[k] || { t: null, s: null };
+    if (Number.isFinite(t) && (o.t === null || t < o.t)) o.t = t;
+    if (Number.isFinite(sc) && (o.s === null || sc > o.s)) o.s = Math.round(sc);
+    p[k] = o; lbSavePending(p);
+  };
+  function glbEl(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function glbValidRow(r) { return r && typeof r === 'object' && typeof r.username === 'string' && NAME_RE.test(r.username); }
+  function renderGlb(lb, ch) {
+    const champs = $c('glb-champs'), list = $c('glb-list');
+    champs.textContent = ''; list.textContent = '';
+    const byBoss = {};
+    (Array.isArray(ch) ? ch : []).forEach(r => { if (glbValidRow(r) && GLB_BOSS_RE.test(r.boss_id) && Number.isFinite(r.best_time)) byBoss[r.boss_id] = r; });
+    BOSSES.forEach(b => {
+      const r = byBoss[b.id], row = glbEl('button', 'glb-row' + (b.id === glbBoss ? ' sel' : ''));
+      row.type = 'button';
+      row.appendChild(glbEl('span', 'n', b.name)); row.appendChild(glbEl('span', 'n', r ? r.username : '—')); row.appendChild(glbEl('span', 't', r ? formatTime(r.best_time) : '—'));
+      row.addEventListener('click', () => { glbBoss = b.id; glbRefresh(); });
+      champs.appendChild(row);
+    });
+    const bd = getBossById(glbBoss);
+    $c('glb-list-title').textContent = 'TOP 10 — ' + (bd ? bd.name.toUpperCase() : '') + ' · ' + DIFFICULTIES[glbDiff].name.toUpperCase();
+    const rows = (Array.isArray(lb) ? lb : []).filter(glbValidRow);
+    if (!rows.length) { list.appendChild(glbEl('div', 'glb-status', 'Aucun temps enregistré pour l\'instant : sois le premier.')); return; }
+    rows.forEach((r, i) => {
+      const row = glbEl('div', 'glb-row' + (r.is_me === true ? ' me' : ''));
+      row.appendChild(glbEl('span', '', '#' + (i + 1))); row.appendChild(glbEl('span', 'n', r.username));
+      row.appendChild(glbEl('span', 't', Number.isFinite(r.best_time) ? formatTime(r.best_time) : '—'));
+      row.appendChild(glbEl('span', 's', Number.isFinite(r.best_score) ? r.best_score + ' pts' : '—'));
+      list.appendChild(row);
+    });
+  }
+  async function glbRefresh() {
+    const st = $c('glb-status'); if (!st) return;
+    if (!sb) { st.textContent = navigator.onLine ? 'Classement en cours de connexion…' : 'Hors ligne : classement indisponible.'; return; }
+    if (!glbBoss || !getBossById(glbBoss)) glbBoss = currentBossId;
+    const seq = ++glbSeq;
+    try {
+      const [lb, ch] = await Promise.all([
+        sb.rpc('get_leaderboard', { p_boss: glbBoss, p_diff: glbDiff, p_by: glbBy, p_limit: 10 }),
+        sb.rpc('get_champions', { p_diff: glbDiff }),
+      ]);
+      if (seq !== glbSeq) return;
+      if (lb.error || ch.error) throw (lb.error || ch.error);
+      renderGlb(lb.data, ch.data);
+      st.textContent = meta.username ? '' : 'Connecte-toi (Google/Discord) pour apparaître au classement.';
+    } catch (e) { if (seq === glbSeq) st.textContent = 'Classement indisponible (serveur non mis à jour ou injoignable).'; }
+  }
+  async function glbSync() {
+    try {
+      if (sb && meta.username) {
+        const p = lbLoadPending(), rows = Object.keys(p).map(k => { const a = k.split('|'); return { b: a[0], d: +a[1], t: p[k].t, s: p[k].s }; });
+        if (rows.length) {
+          const r = await sb.rpc('submit_boss_scores', { p_rows: rows });
+          if (!r.error) { const cur = lbLoadPending(); rows.forEach(x => { const k = x.b + '|' + x.d, c = cur[k]; if (c && c.t === x.t && c.s === x.s) delete cur[k]; }); lbSavePending(cur); }
+        }
+      }
+      await glbRefresh();
+    } catch (e) {}
+  }
+  function glbInit() {
+    if (!$c('global-lb')) return;
+    glbDiff = Math.min(Math.max(diffIndex, 0), DIFFICULTIES.length - 1); glbBoss = currentBossId;
+    const diffs = $c('glb-diffs'), mode = $c('glb-mode');
+    const sel = (box, idx) => Array.prototype.forEach.call(box.children, (b, i) => b.classList.toggle('selected', i === idx));
+    DIFFICULTIES.forEach((d, i) => { const b = glbEl('button', 'mode-btn' + (i === glbDiff ? ' selected' : ''), d.name); b.type = 'button'; b.addEventListener('click', () => { glbDiff = i; sel(diffs, i); glbRefresh(); }); diffs.appendChild(b); });
+    [['time', 'Trier : temps'], ['score', 'Trier : score']].forEach(([k, label], i) => { const b = glbEl('button', 'mode-btn' + (i === 0 ? ' selected' : ''), label); b.type = 'button'; b.addEventListener('click', () => { glbBy = k; sel(mode, i); glbRefresh(); }); mode.appendChild(b); });
+    const rf = glbEl('button', 'mode-btn', '↻'); rf.type = 'button'; rf.setAttribute('aria-label', 'Actualiser le classement'); rf.addEventListener('click', () => cloudSync(true)); mode.appendChild(rf);
+    glbRefresh();
+  }
+  glbInit();
   cloudInit();
 
   init();
